@@ -1,0 +1,23 @@
+{
+  "name": "kata",
+  "version": "0.1.0",
+  "description": "ad",
+  "main": "index.js",
+  "repository": "repository url",
+  "author": "Riccardo Vecchi <rvecchi@byte-code.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "12"
+  },
+  "scripts": {
+    "serverless": "serverless",
+    "deploy": "serverless deploy"
+  },
+  "dependencies": {
+    "serverless": "1.59.x"
+  },
+  "devDependencies": {
+    "@types/node": "12.12.x",
+    "serverless-plugin-browserify": "^1.1.3"
+  }
+}
