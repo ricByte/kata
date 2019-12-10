@@ -1,0 +1,12 @@
+dynamoProvisionedReadCapacity:
+  local: 10
+  dev: 10
+dynamoProvisionedWriteCapacity:
+  local: 10
+  dev: 10
+timeout:
+  local: 30
+  dev: 30
+memorySize:
+  local: 512
+  dev: 512

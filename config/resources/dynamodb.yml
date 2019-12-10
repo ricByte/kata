@@ -1,0 +1,17 @@
+Resources:
+  Users:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.database.usersTableName}
+      AttributeDefinitions:
+        - AttributeName: guid
+          AttributeType: S
+      KeySchema:
+        - AttributeName: guid
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedReadCapacity.${self:provider.stage}}
+        WriteCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedWriteCapacity.${self:provider.stage}}
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: TRUE

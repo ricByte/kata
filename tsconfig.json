@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "es6",
+        "lib": [
+            "esnext",
+            "es2019"
+        ],
+        "types": [
+            "jest",
+            "node"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "paths": {
+            "@common/*": [
+                "common/*"
+            ],
+            "@handler/*": [
+                "handler/*"
+            ],
+            "@model/*": [
+                "model/*"
+            ]
+        },
+        "baseUrl": "src",
+        "outDir": "dist",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "plugins": [
+            {
+                "transform": "typescript-transform-paths"
+            }
+        ]
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "__tests__",
+        "dist",
+        "yarn.lock"
+    ]
+}

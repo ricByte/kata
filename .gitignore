@@ -91,6 +91,7 @@ atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
 .idea/replstate.xml
+.idea/sonarlint/
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -122,3 +123,11 @@ lerna-debug.log*
 #Build
 dist
 build
+
+#Serverless
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless

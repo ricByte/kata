@@ -1,0 +1,5 @@
+{
+  "**/*.ts": ["yarn pre-commit","git add"],
+  "**/*.json": ["yarn pre-commit","git add"],
+  "**/*.js": ["yarn pre-commit","git add"]
+}

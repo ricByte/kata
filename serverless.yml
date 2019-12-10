@@ -1,0 +1,88 @@
+service:
+  name: kata
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  profile: personal
+  region: ${opt:region, 'eu-west-1'}
+  runtime: nodejs12.x
+  memorySize: ${file(./config/scale.config.yml):memorySize.${self:provider.stage}}
+  timeout: ${file(./config/scale.config.yml):timeout.${self:provider.stage}}
+  iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteIte
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:dynamodb:'
+            - Ref: "AWS::Region"
+            - ':*:*'
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:lambda:'
+            - Ref: "AWS::Region"
+            - ':*:*'
+  logs:
+    restApi:
+      accessLogging: true
+      level: INFO
+    frameworkLambda: true
+
+  environment:
+    ${file(./config/env.config.yml)}
+
+custom:
+  database:
+    usersTableName: ${self:provider.stage}_users
+  browserify:
+    ignoreTransform: [coffeeify]
+    fullPaths: true
+    exclude:
+      - aws-sdk
+  serverless-offline:
+    stage: local
+    stages:
+      - local
+    port: 4000
+  dynamodb:
+    stage: local
+    start:
+      port: 9988
+      inMemory: true
+      heapMax: 1g
+      migrate: true
+
+functions:
+
+  status:
+    handler: dist/handler/status.lambda
+    browserify:
+      entries:
+        - dist/handler/status.js
+    events:
+      - http:
+          method: get
+          path: /status
+
+resources:
+  - ${file(./config/resources/dynamodb.yml)}
+
+plugins:
+  - serverless-plugin-browserifier
+  - serverless-dynamodb-local
+  - serverless-offline
+
+package:
+  individually: true
