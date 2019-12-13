@@ -1,7 +1,7 @@
 export type MessagePersist = {
     userId: string
     text: string
-    date: string
+    createdAt: string
     messageId: string
-    index: number
 }
+

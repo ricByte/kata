@@ -1,7 +1,7 @@
 import { User } from '@model/app/user';
 import { UserPersist } from '@model/persist/userPersist';
 
-import { transformDateForDB } from './util';
+import { transformDateForDB, transformDateFromDB } from './util';
 
 
 export const buildUserForPersisting = (user: User): UserPersist => {
@@ -12,3 +12,8 @@ export const buildUserForPersisting = (user: User): UserPersist => {
         surname: user.surname,
     };
 }
+
+export const buildUserFromDB = (user: UserPersist): User => ({
+    ...user,
+    createdAt: transformDateFromDB(user.createdAt)
+});

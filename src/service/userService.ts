@@ -4,6 +4,7 @@ import uuidv4 from 'uuidv4';
 import { userDynamoResource } from '../resources/dynamoDBResources';
 import { logger } from './logger';
 import { GenericError } from '@model/app/errors';
+import { createErrorForService } from './error';
 
 
 export class UserService {
@@ -13,8 +14,7 @@ export class UserService {
         try {
             await userDynamoResource.saveUser(user);
         } catch (e) {
-            const logMarker: string = logger.error('Can\'t save User', e);
-            throw new GenericError('Can\'t save User', logMarker);
+            createErrorForService('Can\'t save User', e);
         }
         return user;
     }
@@ -25,6 +25,15 @@ export class UserService {
             createdAt: new Date(),
             name: req.name,
             surname: req.surname,
+        }
+    }
+
+    async verifyUser(userId: string): Promise<boolean> {
+        try {
+            const user: User | undefined = await userDynamoResource.getUserById(userId);
+            return !!user;
+        } catch (e) {
+            createErrorForService(`Can't verify user`, e);
         }
     }
 }
