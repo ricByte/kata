@@ -18,7 +18,7 @@ Resources:
   Message:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.database.usersTableName}
+      TableName: ${self:custom.database.messagesTableName}
       AttributeDefinitions:
         - AttributeName: messageId
           AttributeType: S
