@@ -46,6 +46,7 @@ provider:
 custom:
   database:
     usersTableName: ${self:provider.stage}_users
+    messagesTableName: ${self:provider.stage}_messages
   browserify:
     ignoreTransform: [coffeeify]
     fullPaths: true
