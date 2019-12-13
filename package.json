@@ -16,14 +16,16 @@
         "build": "yarn clean && yarn format && yarn compile",
         "install:db": "serverless dynamodb install",
         "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-        "start": "yarn build && node --inspect $(which serverless) offline start --printOutput --stage local",
+        "start": "export AWS_PROFILE=personal && yarn build && node --inspect $(which serverless) offline start --printOutput --stage dev",
         "deploy": "yarn build && serverless deploy --stage dev",
         "pre-commit": "echo 'pre-commit' && yarn format"
     },
     "dependencies": {
         "aws-lambda": "0.1.x",
+        "aws-sdk": "^2.589.0",
         "serverless": "1.54.x",
-        "uuidv4": "5.0.x"
+        "uuidv4": "5.0.x",
+        "class-validator": "0.11.x"
     },
     "devDependencies": {
         "@types/aws-lambda": "8.10.x",

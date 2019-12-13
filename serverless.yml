@@ -75,6 +75,15 @@ functions:
       - http:
           method: get
           path: /status
+  saveUser:
+    handler: dist/handler/saveUser.lambda
+    browserify:
+      entries:
+        - dist/handler/saveUser.js
+    events:
+      - http:
+          method: post
+          path: /saveUser
 
 resources:
   - ${file(./config/resources/dynamodb.yml)}

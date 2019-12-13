@@ -1,5 +1,4 @@
-import { LambdaOptions } from '../types';
-import { httpDecorator } from '../decorators';
+import { httpDecorator, LambdaOptions } from './utils/decorators';
 
 export const lambda = httpDecorator(async (event: any, options: LambdaOptions) => {
     return {

@@ -4,10 +4,10 @@ Resources:
     Properties:
       TableName: ${self:custom.database.usersTableName}
       AttributeDefinitions:
-        - AttributeName: guid
+        - AttributeName: userId
           AttributeType: S
       KeySchema:
-        - AttributeName: guid
+        - AttributeName: userId
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedReadCapacity.${self:provider.stage}}
