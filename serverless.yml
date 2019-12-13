@@ -84,6 +84,15 @@ functions:
       - http:
           method: post
           path: /saveUser
+  postMessage:
+    handler: dist/handler/postMessage.lambda
+    browserify:
+      entries:
+        - dist/handler/postMessage.js
+    events:
+      - http:
+          method: post
+          path: /postMessage
 
 resources:
   - ${file(./config/resources/dynamodb.yml)}
