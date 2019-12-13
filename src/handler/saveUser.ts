@@ -12,7 +12,7 @@ export const handler = async (event: any = {}, options: LambdaOptions) => {
     const eventToValidate = new UserEvent({ ...event });
     return validationDecorator(eventToValidate, options, async (eventValidated: UserEvent): Promise<UserResponse | ErrorResponse> => {
         try {
-            const userSaved: User = await userService.createUser(event);
+            const userSaved: User = await userService.createUser(eventValidated);
             return getUserForResponse(userSaved);
         } catch (e) {
             return getErrorForResponse(e);
