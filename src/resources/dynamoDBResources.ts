@@ -2,14 +2,16 @@ import { AWSError } from 'aws-sdk';
 import { logger } from '../service/logger';
 import { User } from '@model/app/user';
 import { UserPersist } from '@model/persist/userPersist';
-import { buildUserForPersisting, buildUserFromDB } from './builder';
-import { UserResource } from './resources';
+import { buildUserForPersisting, buildUserFromDB, buildMessageForPersisting } from './builder';
+import { UserResource, MessagesResource } from './resources';
 import {
     PutItemInput,
     PutItemOutput,
     DocumentClient,
 } from 'aws-sdk/clients/dynamodb';
 import { createErrorForService } from '../service/error';
+import { Message } from '@model/app/message';
+import { MessagePersist } from '@model/persist/messagePersist';
 
 
 const dynamoDBResources = new DocumentClient();
@@ -95,3 +97,19 @@ export class UserDynamoResource implements UserResource {
 
 
 export const userDynamoResource = new UserDynamoResource();
+
+export class MessageDynamoResource implements MessagesResource {
+    tableService: DynamoDBTableService;
+
+    constructor() {
+        this.tableService = new DynamoDBTableService(process.env.messagesTableName);
+    }
+
+    postMessage(message: Message): Promise<boolean> {
+        const messageToSave: MessagePersist = buildMessageForPersisting(message);
+        return this.tableService.putItem(messageToSave);
+    }
+
+
+}
+export const messageDynamoResource = new MessageDynamoResource();
