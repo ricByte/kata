@@ -7,7 +7,7 @@ import uuidv4 from 'uuidv4';
 
 
 export class MessagingService {
-    async postMessage(postMessageEvent: PostMessageEvent): Promise<Message | undefined> {
+    async postMessage(postMessageEvent: PostMessageEvent): Promise<Message> {
         try {
             const isVerifiedUser: boolean = await userService.verifyUser(postMessageEvent.userId);
             if (isVerifiedUser) {
@@ -18,6 +18,8 @@ export class MessagingService {
         } catch (e) {
             createErrorForService('Can\'t post message', e)
         }
+
+        createErrorForService('User not verified')
     }
 
     protected getUserFromMessageEvent(req: PostMessageEvent): Message {
