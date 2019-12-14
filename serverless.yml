@@ -67,6 +67,16 @@ custom:
 
 functions:
 
+  createTestEnv:
+    handler: dist/handler/createTestEnv.lambda
+    browserify:
+      entries:
+        - dist/handler/createTestEnv.js
+    events:
+      - http:
+          method: get
+          path: /create
+          cors: true
   status:
     handler: dist/handler/status.lambda
     browserify:
