@@ -23,7 +23,7 @@ Resources:
         - AttributeName: messageId
           AttributeType: S
         - AttributeName: createdAt
-          AttributeType: S
+          AttributeType: N
       KeySchema:
         - AttributeName: messageId
           KeyType: HASH

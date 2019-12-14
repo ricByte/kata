@@ -13,16 +13,21 @@ export const buildUserForPersisting = (user: User): UserPersist => {
         name: user.name,
         surname: user.surname,
     };
-}
+};
 
 export const buildMessageForPersisting = (message: Message): MessagePersist => {
     return {
         ...message,
         createdAt: transformDateForDB(message.createdAt),
     };
-}
+};
 
 export const buildUserFromDB = (user: UserPersist): User => ({
     ...user,
     createdAt: transformDateFromDB(user.createdAt)
+});
+
+export const buildMessageFromDB = (persist: MessagePersist): Message => ({
+    ...persist,
+    createdAt: transformDateFromDB(persist.createdAt)
 });

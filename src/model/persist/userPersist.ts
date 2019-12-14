@@ -1,6 +1,6 @@
 export type UserPersist = {
     userId: string
-    createdAt: string
+    createdAt: number
     name: string
     surname: string
 }
