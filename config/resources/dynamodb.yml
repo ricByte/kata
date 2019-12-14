@@ -22,9 +22,21 @@ Resources:
       AttributeDefinitions:
         - AttributeName: messageId
           AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: S
       KeySchema:
         - AttributeName: messageId
           KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: createdIndex
+          KeySchema:
+            - AttributeName: createdAt
+              KeyType: HASH
+          Projection:
+            ProjectionType: KEYS_ONLY
+          ProvisionedThroughput:
+            ReadCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedReadCapacity.${self:provider.stage}}
+            WriteCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedWriteCapacity.${self:provider.stage}}
       ProvisionedThroughput:
         ReadCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedReadCapacity.${self:provider.stage}}
         WriteCapacityUnits: ${file(./config/scale.config.yml):dynamoProvisionedWriteCapacity.${self:provider.stage}}
