@@ -50,7 +50,7 @@ Provide in header the key `user` evalueted with `{userId}`
 
 To read messages in db. If `time` not provided take the oldest one as input  
 ```
-GET /postMessage/{time}
+GET /messages/{time}
 ```
 
 Provide in header the key `user` evalueted with `{userId}`

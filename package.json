@@ -1,9 +1,9 @@
 {
     "name": "kata",
     "version": "0.1.0",
-    "description": "ad",
+    "description": "Kata social",
     "main": "index.js",
-    "repository": "repository url",
+    "repository": "https://github.com/ricByte/kata",
     "author": "Riccardo Vecchi <rvecchi@byte-code.com>",
     "license": "MIT",
     "engines": {
