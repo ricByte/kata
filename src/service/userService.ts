@@ -2,8 +2,6 @@ import { UserEvent } from '@model/event/userEvent';
 import { User } from '@model/app/user';
 import uuidv4 from 'uuidv4';
 import { userDynamoResource } from '../resources/dynamoDBResources';
-import { logger } from './logger';
-import { GenericError } from '@model/app/errors';
 import { createErrorForService } from './error';
 
 
@@ -34,6 +32,16 @@ export class UserService {
             return !!user;
         } catch (e) {
             createErrorForService(`Can't verify user`, e);
+        }
+    }
+
+    async getUserByIdList(list: string[]): Promise<User[] | undefined> {
+        if (list.length) {
+            try {
+                return await userDynamoResource.getUserByIdList(list);
+            } catch (e) {
+                createErrorForService(`Can't verify user`, e);
+            }
         }
     }
 }

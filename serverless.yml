@@ -76,6 +76,7 @@ functions:
       - http:
           method: get
           path: /status
+          cors: true
   saveUser:
     handler: dist/handler/saveUser.lambda
     browserify:
@@ -85,6 +86,7 @@ functions:
       - http:
           method: post
           path: /saveUser
+          cors: true
   postMessage:
     handler: dist/handler/postMessage.lambda
     browserify:
@@ -94,6 +96,25 @@ functions:
       - http:
           method: post
           path: /postMessage
+          cors: true
+  messages:
+    handler: dist/handler/messages.lambda
+    browserify:
+      entries:
+        - dist/handler/messages.js
+    events:
+      - http:
+          method: get
+          path: /messages/{time}
+          cors: true
+          request:
+            parameters:
+              paths:
+                time: true
+      - http:
+          method: get
+          path: /messages/
+          cors: true
 
 resources:
   - ${file(./config/resources/dynamodb.yml)}

@@ -11,7 +11,12 @@ export const httpDecorator = (fn: BaseHandler) => {
     const handle = async (event: any, context: Context) => {
         try {
             const options = new LambdaOptions(event, context);
-            const body = await fn(JSON.parse(event.body), options);
+            const eventBody = {
+                ...JSON.parse(event.body),
+                ...event.pathParameters,
+                userId: event.headers.user
+            };
+            const body = await fn(eventBody, options);
             return {
                 statusCode: 200,
                 body: JSON.stringify(body, null, 2),

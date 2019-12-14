@@ -1,15 +1,16 @@
 import { IsDefined, IsString, IsNotEmpty } from 'class-validator';
 
 enum MESSAGE_VALIDATION_MESSAGE {
-    USER_ID = 'MISSING USER REFERENCE',
-    TEXT = 'MISSING TEXT'
+    USER_ID_MISSING = 'MISSING USER REFERENCE',
+    USER_ID_NOT_VALID = 'NOT VALID USER REFERENCE',
+    TEXT = 'MISSING TEXT',
 }
 
 export class PostMessageEvent {
 
-    @IsDefined({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID })
-    @IsString({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID })
-    @IsNotEmpty({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID })
+    @IsDefined({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID_MISSING })
+    @IsString({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID_NOT_VALID })
+    @IsNotEmpty({ message: MESSAGE_VALIDATION_MESSAGE.USER_ID_NOT_VALID })
     userId: string;
 
     @IsDefined({ message: MESSAGE_VALIDATION_MESSAGE.TEXT })

@@ -4,6 +4,7 @@ import { createErrorForService } from './error';
 import { Message } from '@model/app/message';
 import { messageDynamoResource } from '../resources/dynamoDBResources';
 import uuidv4 from 'uuidv4';
+import { User } from '@model/app/user';
 
 
 export class MessagingService {
@@ -20,6 +21,18 @@ export class MessagingService {
         }
 
         createErrorForService('User not verified')
+    }
+
+    async getMessagesPerPage(userId: string, time: string = process.env.firstAvailableDate): Promise<Message[]> {
+        try {
+            const isVerifiedUser: boolean = await userService.verifyUser(userId);
+            if (isVerifiedUser) {
+                const lastMessageDate = new Date(parseInt(time));
+                return await messageDynamoResource.getMessagesPerPage(lastMessageDate);
+            }
+        } catch (e) {
+            createErrorForService('Can\'t find messages', e)
+        }
     }
 
     protected getUserFromMessageEvent(req: PostMessageEvent): Message {

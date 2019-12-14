@@ -1,6 +1,4 @@
-export type PostMessageResponse = {
-    userId: string
-    text: string
-    createdAt: string
-    messageId: string
-}
+import { MessageResponse } from '@model/response/messageResponse';
+
+
+export type PostMessageResponse = MessageResponse
