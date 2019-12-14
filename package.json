@@ -16,7 +16,7 @@
         "build": "yarn clean && yarn format && yarn compile",
         "install:db": "serverless dynamodb install",
         "test:debug": "node --inspect node_modules/.bin/jest --runInBand",
-        "start": "export AWS_PROFILE=personal && yarn build && node --inspect $(which serverless) offline start --printOutput --stage dev",
+        "start": "yarn build && node --inspect $(which serverless) offline start --printOutput --stage dev",
         "deploy": "yarn build && serverless deploy --stage dev",
         "pre-commit": "echo 'pre-commit' && yarn format"
     },

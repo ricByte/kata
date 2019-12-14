@@ -4,7 +4,6 @@ service:
 provider:
   name: aws
   stage: ${opt:stage, 'dev'}
-  profile: personal
   region: ${opt:region, 'eu-west-1'}
   runtime: nodejs12.x
   memorySize: ${file(./config/scale.config.yml):memorySize.${self:provider.stage}}
