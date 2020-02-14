@@ -21,7 +21,7 @@
         "pre-commit": "echo 'pre-commit' && yarn format"
     },
     "dependencies": {
-        "aws-lambda": "0.1.x",
+        "aws-lambda": "1.0.x",
         "aws-sdk": "^2.589.0",
         "serverless": "1.54.x",
         "uuidv4": "5.0.x",
