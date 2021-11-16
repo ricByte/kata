@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "aws-lambda": "0.1.x",
-        "aws-sdk": "^2.589.0",
+        "aws-sdk": "^2.814.0",
         "serverless": "1.54.x",
         "uuidv4": "5.0.x",
         "class-validator": "0.11.x"
