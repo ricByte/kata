@@ -25,7 +25,7 @@
         "aws-sdk": "^2.589.0",
         "serverless": "1.54.x",
         "uuidv4": "5.0.x",
-        "class-validator": "0.11.x"
+        "class-validator": "0.14.x"
     },
     "devDependencies": {
         "@types/aws-lambda": "8.10.x",
